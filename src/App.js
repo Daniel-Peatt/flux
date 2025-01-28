@@ -1,0 +1,24 @@
+// Import for multipage functionality
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// Importing Pages
+import CreateAccount from './pages/CreateAccount.js'
+import  Home  from './pages/Home';
+import NoPage from './pages/NoPage.js';
+
+function App() {
+  return (
+    <div>
+      <BrowserRouter>
+        <Routes>
+          {/* index means the default path when the webpage is loaded */}
+          <Route index element={<Home />} /> 
+          <Route path="/createAccount" element={<CreateAccount />} />
+          {/* Path = * ... means if page is not found go to this ... 404 Page */}
+          <Route path="*" element={<NoPage />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
+}
+
+export default App;

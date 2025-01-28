@@ -1,0 +1,43 @@
+
+
+.About {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    margin-top: 200px;
+    margin-left: 100px;
+    color: #EAE2C6;
+}
+
+
+.title {
+    font-size: 70px;
+    
+}
+
+.message {
+    font-size:larger;
+}
+
+.button
+{
+    width: 250px;
+    height: 35px;
+    border-radius: 20px;
+    background-color: rgb(227, 205, 163, .25);
+    border-color: rgb(227, 205, 163, .1);
+    color: #EAE2C6;
+    font-size:medium;
+    letter-spacing: 2px;
+    font-weight:400;
+}
+
+.button:hover {
+    background-color: rgba(227, 205, 163, 0.507);
+}
+
+.buttonBox {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
