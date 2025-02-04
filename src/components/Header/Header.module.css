@@ -7,3 +7,7 @@
     font-size: 35px;
     padding-left: 40px;
 }
+
+.icon {
+    cursor: pointer;
+}

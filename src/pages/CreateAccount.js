@@ -1,10 +1,11 @@
 import Header from "../components/Header/Header.jsx";
+import CreateAccount from "../components/CreateAccount/CreateAccount.jsx";
 
-export default function CreateAccount () {
+export default function CreateAccountPage () {
     return (
         <>
         <Header />
-        <h2>Create Account</h2>
+        <CreateAccount />
         </>
     )
 }

@@ -30,6 +30,7 @@
     font-size:medium;
     letter-spacing: 2px;
     font-weight:400;
+    cursor: pointer;
 }
 
 .button:hover {
