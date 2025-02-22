@@ -1,0 +1,15 @@
+h1 {
+    color: #EAE2C6;
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+    justify-self: center;
+    align-items: center;
+    width: 50%;
+    height: 80vh;
+    border: solid;
+    color: #EAE2C6;
+}
+

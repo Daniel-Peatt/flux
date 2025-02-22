@@ -20,7 +20,7 @@ function Login () {
         console.log("email and password entered: ");
         console.log(emailSubmit);
         console.log(passSubmit);
-        navigate("/Dashboard");
+        navigate("/CreateTitle");
     }
 
     // Keeps track of what is currently in the email and password text fields
