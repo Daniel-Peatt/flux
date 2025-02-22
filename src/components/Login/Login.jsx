@@ -1,5 +1,7 @@
 import styles from "./Login.module.css";
 import React, {useState} from "react"; 
+import { useNavigate } from "react-router-dom";
+
 
 function Login () {
     // useStates
@@ -8,6 +10,9 @@ function Login () {
     const [emailSubmit, setEmailSubmit] = useState("");
     const [passSubmit, setPassSubmit] = useState("");
 
+    // Used for routing pages
+    const navigate = useNavigate();
+
     // Saves the value of information in the text-fields to a varible
     const handleClick = () => {
         setEmailSubmit(email);
@@ -15,6 +20,7 @@ function Login () {
         console.log("email and password entered: ");
         console.log(emailSubmit);
         console.log(passSubmit);
+        navigate("/Dashboard");
     }
 
     // Keeps track of what is currently in the email and password text fields
@@ -25,6 +31,13 @@ function Login () {
     const handlePassChange = (event) => {
         setPass(event.target.value);
     }
+
+    // Used to navigate to the createAccount Route when button is pressed
+   
+    const goToDashboard = () => {
+        navigate("/Dashboard");
+    }
+    
 
 
     return (

@@ -5,7 +5,7 @@ function CreateAccountPage () {
         <div className={styles.Login}>
             <div> 
                 <div className={styles.loginTitle}>
-                    Log in
+                    Create Account
                 </div>
                 <form action="" className={styles.TextFields}>
                     <label className={styles.userNameLabel}> User Name <br />
