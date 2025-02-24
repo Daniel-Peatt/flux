@@ -37,9 +37,34 @@ app.get("/users", async(req,res) => {
 })
 
 // Get a user
-app.get("/users:id", async(req, res) => {
+app.get("/users/:id", async(req, res) => {
   try {
-    
+    const { id } = req.params; // Stores the id recieved from the API call
+    const user = await pool.query("SELECT * FROM users WHERE id = $1", [id]); // Query sent to the database
+    res.json(user.rows[0]); // Stores the results into a JSON
+  } catch (err) {
+    console.error(err.message);
+  }
+})
+
+// Change user password
+app.put("/users/:id", async(req, res) => {
+  try {
+    const { id } = req.params;
+    const { password_hash } = req.body;
+    const updatedPassword = await pool.query("UPDATE users SET password_hash = $1 WHERE id = $2", [password_hash, id]);
+    res.json("User password was updated");
+  } catch (err) {
+    console.error(err.message);
+  }
+})
+
+// Delete a user 
+app.delete("/users/:id", async(req,res) => {
+  try {
+    const { id } = req.params;
+    const deleteUser = await pool.query("DELETE FROM users WHERE id = $1", [id]);
+    res.json("User has been deleted");
   } catch (err) {
     console.error(err.message);
   }
