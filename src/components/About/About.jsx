@@ -7,7 +7,7 @@ const About = () => {
     const [data, setData] = useState([]);
     
     useEffect(() => {
-        fetch("http://localhost:5000/api/data")
+        fetch("http://localhost:5000/users")
           .then((response) => response.json())
           .then((json) => setData(json))
           .catch((error) => console.error("Error fetching data:", error));

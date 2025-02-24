@@ -1,34 +1,51 @@
 // Runs a server 
 // Creates an API for my React Website to push and pull data from
 
-require("dotenv").config();
-const express = require("express"); // Framework 
+// Requirements 
+const pool = require("./db");
 const cors = require("cors");
-const { Pool } = require("pg"); // Used to connect to React page
-
+const express = require("express"); // Framework 
 const app = express();
+
+// Middleware
 app.use(cors());
 app.use(express.json()); // Enable JSON parsing
 
-// Login info to my local server
-const pool = new Pool({
-    user: "postgres",            
-    host: "localhost",
-    database: "flux",
-    password: "Lemontree504",    
-    port: 5432,
-  });
+// ROUTES // 
 
-// API Route to Get Data
-app.get("/api/data", async (req, res) => {
+// Create a user 
+app.post("/CreateUser", async(req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM users");
-    res.json(result.rows);
+    const {email} = req.body;
+    const {password_hash} = req.body;
+    const newUser = await pool.query(`INSERT INTO users (email, password_hash) VALUES ($1, $2) RETURNING *`, [email, password_hash]);
+
+    res.json(newUser);
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Server Error");
+    console.error(err.message);
   }
-});
+})
+
+// Get all users 
+app.get("/users", async(req,res) => {
+  try {
+    const allUsers = await pool.query("SELECT * FROM users");
+    res.json(allUsers.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+})
+
+// Get a user
+app.get("/users:id", async(req, res) => {
+  try {
+    
+  } catch (err) {
+    console.error(err.message);
+  }
+})
+
+
 
 app.post('/insert', async (req, res) => {
     const { email, pass } = req.body;
@@ -39,7 +56,7 @@ app.post('/insert', async (req, res) => {
   
     try {
       const result = await pool.query(
-        'INSERT INTO users (name, pass) VALUES ($1, $2) RETURNING *',
+        'INSERT INTO users (name, password_hash) VALUES ($1, $2) RETURNING *',
         [email, pass]
       );
   
@@ -52,6 +69,5 @@ app.post('/insert', async (req, res) => {
 
 // API Route to Insert Data
 
-// Start Server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Starting the server
+app.listen(5000, () => console.log(`Server running on port 5000`));
