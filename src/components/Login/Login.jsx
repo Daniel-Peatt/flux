@@ -14,6 +14,7 @@ function Login () {
     const navigate = useNavigate();
 
     // Saves the value of information in the text-fields to a varible
+    // Used to navigate to the createAccount Route when button is pressed
     const handleClick = () => {
         setEmailSubmit(email);
         setPassSubmit(pass);
@@ -31,14 +32,6 @@ function Login () {
     const handlePassChange = (event) => {
         setPass(event.target.value);
     }
-
-    // Used to navigate to the createAccount Route when button is pressed
-   
-    const goToDashboard = () => {
-        navigate("/Dashboard");
-    }
-    
-
 
     return (
         <div className={styles.Login}>

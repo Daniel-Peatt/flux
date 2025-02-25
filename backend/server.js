@@ -19,10 +19,12 @@ app.post("/CreateUser", async(req, res) => {
     const {email} = req.body;
     const {password_hash} = req.body;
     const newUser = await pool.query(`INSERT INTO users (email, password_hash) VALUES ($1, $2) RETURNING *`, [email, password_hash]);
-
-    res.json(newUser);
+    res.status(201).json({ message: "User created successfully" });
   } catch (err) {
-    console.error(err.message);
+    if (err.code === "23505") {
+      return res.status(409).json({error: "Email already exists."});
+    }
+    res.status(500).json({ error: "Server error" });
   }
 })
 

@@ -1,5 +1,6 @@
 import styles from "./CreateAccount.module.css";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function CreateAccountPage () {
     
@@ -7,6 +8,9 @@ function CreateAccountPage () {
     const [email, setEmail] = useState("");
     const [password_hash, setPassword_hash] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+
+    const navigate = useNavigate();
 
     // Sends new account information to the database
     const onSubmitForm = async(e) => {
@@ -19,12 +23,25 @@ function CreateAccountPage () {
                 body: JSON.stringify(body) // Sets and converts the body into a JSON
             });
             const result = await response.json();
-            alert("Account Created");
             console.log(result);
+            if (response.status === 409) {
+                setErrorMessage("Email is already taken.");
+                return;
+            } else if (!response.ok) {
+                setErrorMessage(result.error || "Something went wrong. Please try again.");
+                return;
+            }    
+            // If successful, routes the user to the CreateTitle page
+            if (response.ok) {
+                // Navigate to another page after successful registration
+                navigate("/CreateTitle"); 
+            }
         } catch (err) {
             console.error(err.message);
         }
     }
+
+
 
     return (
         <div className={styles.Login}>
@@ -59,6 +76,8 @@ function CreateAccountPage () {
                     </div>
                    
                 </form>
+
+                {errorMessage && <p className={styles.error}>{errorMessage}</p>}
                 
             </div>
         </div>
