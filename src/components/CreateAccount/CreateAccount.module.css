@@ -84,3 +84,8 @@ input[type="password"]:focus {
 .button:hover {
     background-color: rgba(227, 205, 163, 0.507);
 }
+
+/* Registration error pop-up */
+.error {
+    color: white;
+}
