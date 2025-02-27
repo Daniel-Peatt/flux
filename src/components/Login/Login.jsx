@@ -6,31 +6,47 @@ import { useNavigate } from "react-router-dom";
 function Login () {
     // useStates
     const [email, setEmail] = useState("");
-    const [pass, setPass] = useState("");
-    const [emailSubmit, setEmailSubmit] = useState("");
-    const [passSubmit, setPassSubmit] = useState("");
+    const [password_hash, setPassword_hash] = useState("");
+
 
     // Used for routing pages
     const navigate = useNavigate();
 
     // Saves the value of information in the text-fields to a varible
     // Used to navigate to the createAccount Route when button is pressed
-    const handleClick = () => {
-        setEmailSubmit(email);
-        setPassSubmit(pass);
-        console.log("email and password entered: ");
-        console.log(emailSubmit);
-        console.log(passSubmit);
-        navigate("/CreateTitle");
-    }
+    const onSubmitForm = async(e) => {
+        e.preventDefault(); // Prevent default form submission behavior
+        
+        
+        try {
 
-    // Keeps track of what is currently in the email and password text fields
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value);
-    }
+            // Make sure email is properly set before making the request
+            if (!email) {
+                throw new Error("Email is empty. Please enter an email.");
+            }
 
-    const handlePassChange = (event) => {
-        setPass(event.target.value);
+            // Check if login information is in the database 
+            const response = await fetch(`http://localhost:5000/users/${encodeURIComponent(email)}`, {
+            method: "GET",
+            headers: {"content-type": "application/json"},
+        });
+        if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                
+
+            // Sending response to the console
+            const result = await response.json();
+            console.log(result);
+
+            // Passing email to the next page
+            navigate(`/CreateTitle/${encodeURIComponent(email)}`);
+
+
+        } catch (err) {
+            console.error(err.message);
+        }
+        
     }
 
     return (
@@ -39,21 +55,21 @@ function Login () {
                 <div className={styles.loginTitle}>
                     Log in
                 </div>
-                <form action="" className={styles.TextFields}>
-                    <label className={styles.userNameLabel}> User Name <br />
+                <form className={styles.TextFields} onSubmit={onSubmitForm}>
+                    <label className={styles.userNameLabel}> Email <br />
                         <input 
                         className={styles.userName} 
                         type="text"
-                        onChange={handleEmailChange} /> 
+                        onChange={e => setEmail(e.target.value)} /> 
                     </label>
                     <label className={styles.passwordLabel}> Password <br />
                         <input 
                         className={styles.password} 
                         type="password" 
-                        onChange={handlePassChange}/> 
+                        onChange={e => setPassword_hash(e.target.value)}/> 
                     </label>
                     <div className={styles.buttonBox}>
-                        <input onClick={handleClick} type="Button" className={styles.button} value="Submit"/>
+                        <input type="submit" className={styles.button} value="Submit"/>
                     </div>
                    
                 </form>

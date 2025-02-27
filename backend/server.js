@@ -38,11 +38,11 @@ app.get("/users", async(req,res) => {
   }
 })
 
-// Get a user
-app.get("/users/:id", async(req, res) => {
+// Get a user by email
+app.get("/users/:email", async(req, res) => {
   try {
-    const { id } = req.params; // Stores the id recieved from the API call
-    const user = await pool.query("SELECT * FROM users WHERE id = $1", [id]); // Query sent to the database
+    const { email } = req.params; // Stores the id recieved from the API call
+    const user = await pool.query("SELECT * FROM users WHERE email = $1", [email]); // Query sent to the database
     res.json(user.rows[0]); // Stores the results into a JSON
   } catch (err) {
     console.error(err.message);
