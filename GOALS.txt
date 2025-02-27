@@ -1,0 +1,2 @@
+1- Set up login and display "Hello {email}" - DONE 2/27
+2- Have the passwords verify on login. 
