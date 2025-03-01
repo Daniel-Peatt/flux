@@ -7,7 +7,7 @@ function Login () {
     // useStates
     const [email, setEmail] = useState("");
     const [password_hash, setPassword_hash] = useState("");
-
+    const [errorMessage, setErrorMessage] = useState("");
 
     // Used for routing pages
     const navigate = useNavigate();
@@ -19,14 +19,18 @@ function Login () {
         
         
         try {
+            // Change email to lower case, so it matches the DB standard
+            const lowerCaseEmail = email.toLowerCase();
+            console.log(lowerCaseEmail);
 
             // Make sure email is properly set before making the request
             if (!email) {
-                throw new Error("Email is empty. Please enter an email.");
+                setErrorMessage("Failed Login - Try again")
+                return;
             }
 
             // Check if login information is in the database 
-            const response = await fetch(`http://localhost:5000/users/${encodeURIComponent(email)}`, {
+            const response = await fetch(`http://localhost:5000/users/${encodeURIComponent(lowerCaseEmail)}`, {
             method: "GET",
             headers: {"content-type": "application/json"},
         });
@@ -38,9 +42,17 @@ function Login () {
             // Sending response to the console
             const result = await response.json();
             console.log(result);
+            console.log(result.password_hash);
+
+            // Password Check
+            if(password_hash != result.password_hash)
+            {
+                setErrorMessage("Failed Login - Try again")
+                return;
+            }
 
             // Passing email to the next page
-            navigate(`/CreateTitle/${encodeURIComponent(email)}`);
+            navigate(`/CreateChallenge/${encodeURIComponent(email)}`);
 
 
         } catch (err) {
@@ -73,7 +85,7 @@ function Login () {
                     </div>
                    
                 </form>
-                
+                {errorMessage && <p className={styles.error}>{errorMessage}</p>}
             </div>
         </div>
     );

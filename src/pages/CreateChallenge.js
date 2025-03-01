@@ -1,5 +1,5 @@
 import Header from "../components/Header/Header.jsx";
-import ChallengeTitle from "../components/ChallengeTitle/ChallengeTitle.jsx";
+import ChallengeTitle from "../components/CreateChallenge/ChallengeTitle.jsx";
 
 export default function CreateTitle () {
     return (

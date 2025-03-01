@@ -23,7 +23,10 @@ function CreateAccountPage () {
         try {
             // Information from form
             const body = {email, password_hash, confirmPassword};
-
+            
+            // Setting email to lowercase so the database doesn't have repeated emails
+            body.email = body.email.toLowerCase();
+            
             // Check if email is valid
             if (!validateEmail(email))
             {
@@ -58,7 +61,7 @@ function CreateAccountPage () {
 
             // If the response status is 409, the email already exist in the database. 
             if (response.status === 409) {
-                setErrorMessage("Email is already taken.");
+                setErrorMessage("Email is already in use.");
                 return;
             } else if (!response.ok) {
                 setErrorMessage(result.error || "Something went wrong. Please try again.");
@@ -68,7 +71,7 @@ function CreateAccountPage () {
             // If successful, routes the user to the CreateTitle page
             if (response.ok) {
                 // Navigate to the CreateTitle page after successful registration
-                navigate("/CreateTitle"); 
+                navigate(`/CreateChallenge/${encodeURIComponent(email)}`); 
             }
         } catch (err) {
             console.error(err.message);
@@ -84,7 +87,7 @@ function CreateAccountPage () {
                     Create Account
                 </div>
                 <form className={styles.TextFields} onSubmit={onSubmitForm}>
-                    <label className={styles.emailLabel}> User Name <br />
+                    <label className={styles.emailLabel}> Email <br />
                         <input 
                         className={styles.email} 
                         type="text" 

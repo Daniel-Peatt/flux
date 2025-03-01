@@ -84,3 +84,7 @@ input[type="password"]:focus {
 .button:hover {
     background-color: rgba(227, 205, 163, 0.507);
 }
+
+.error {
+    color: white;
+}
