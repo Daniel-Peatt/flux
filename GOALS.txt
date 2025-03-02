@@ -1,4 +1,13 @@
 1- Set up login and display "Hello {email}" - DONE 2/27
 2- Have the passwords verify on login. - DONE 3/1
-3- Create a form that will create a challenge 
-4- have all emails sent to the database be lowercase
+3- have all emails sent to the database be lowercase - DONE 3/1
+4- Create the visuals of a form that will create a challenge - IN PROGRESS
+    - Add line through the submit button
+    - Find out a way to get the taskField selected after a submit
+
+KNOWN ISSUES
+
+CreateChallenge:
+    - Submit button shrinks when task list gets too long 
+    - When hitting enter on the task list have the task added, not submiting the whole form
+

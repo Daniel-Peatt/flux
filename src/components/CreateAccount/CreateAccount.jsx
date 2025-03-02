@@ -35,7 +35,7 @@ function CreateAccountPage () {
             }
 
             // Check if passwords match
-            if (password_hash != confirmPassword)
+            if (password_hash !== confirmPassword)
             {
                 setErrorMessage("Passwords do not match.")
                 return;

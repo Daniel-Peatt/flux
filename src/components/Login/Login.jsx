@@ -45,7 +45,7 @@ function Login () {
             console.log(result.password_hash);
 
             // Password Check
-            if(password_hash != result.password_hash)
+            if(password_hash !== result.password_hash)
             {
                 setErrorMessage("Failed Login - Try again")
                 return;

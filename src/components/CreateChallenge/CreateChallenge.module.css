@@ -1,0 +1,138 @@
+h1 {
+    color: #EAE2C6;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+}
+
+.box1 {
+    display: flex;
+    flex-direction: row;
+}
+
+.box1_1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 30vw;
+    gap: 20px;
+    height: 40vh;
+    color: #EAE2C6;
+}
+
+.box1_2 {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+    width: 30vw;
+    gap: 20px;
+    color: #EAE2C6;
+    padding-top: 32px;
+    width: 100%;
+    max-width: 600px; /* Adjust as needed */
+    overflow: wrap; /* Ensures no unwanted scrolling */
+}
+
+.titleField {
+    width: 25vw;
+}
+
+.submitButton {
+    width: 75px;
+    height: 35px;
+    border-radius: 20px;
+    background-color: rgb(227, 205, 163, .25);
+    border-color: rgb(227, 205, 163, .1);
+    color: #EAE2C6;
+    font-size:smaller;
+    letter-spacing: 2px;
+    font-weight:400;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.addTaskButton {
+    width: 75px;
+    height: 37px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: rgb(227, 205, 163, .25);
+    border-color: rgb(227, 205, 163, .1);
+    color: #EAE2C6;
+    font-size:smaller;
+    letter-spacing: 2px;
+    font-weight:400;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.addTaskButton:hover {
+    background-color: rgba(227, 205, 163, 0.507);
+}
+
+
+.submitButton:hover {
+    background-color: rgba(227, 205, 163, 0.507);
+}
+
+.intentionsField {
+    width: 25vw;
+    height: 100px;
+}
+
+.addTaskField {
+    width: 20vw;
+    margin-bottom: 10px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    padding: 10px;
+    outline: none;
+    background-color: rgba(193, 186, 161, .2); 
+    color: white;
+    margin-left: -7px;
+}
+
+.field {
+    margin-bottom: 10px;
+    border-radius: 15px;
+    padding: 10px;
+    outline: none;
+    background-color: rgba(193, 186, 161, .2); 
+    color: white;
+    margin-left: -7px;
+}
+
+/* For the dynamically generated task */
+.taskList {
+    list-style: none;
+    /* margin-left: -100px; */
+    border-bottom: solid;
+    margin-bottom: 10px;
+    padding: 10px;
+    outline: none;
+    width: 20vw;
+    color: white;
+}
+
+ul {
+    list-style: none; /* Removes default bullets */
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    display: block; /* Ensures full-width behavior */
+    padding: 10px;
+    border-radius: 5px;
+    text-align: left; /* Aligns text properly */
+    white-space: normal; /* Allows text to wrap */
+    word-break: break-word; /* Breaks long words */
+    overflow-wrap: break-word; /* Ensures proper wrapping */
+}
