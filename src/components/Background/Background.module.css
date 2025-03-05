@@ -21,6 +21,7 @@
     height: 80%;
     justify-content: center;
     background-color: rgb(227, 205, 163, .1);
+    z-index: -1;
 }
 .circle3 {
     display: flex;
@@ -30,4 +31,5 @@
     height: 70%;
     justify-content: center;
     background-color: rgb(227, 205, 163, .15);
+    z-index: -1;
 }

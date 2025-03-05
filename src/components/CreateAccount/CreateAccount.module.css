@@ -52,7 +52,7 @@ input[type="password"]:focus {
 
 .password {
     border-radius: 15px;
-    width: 250px;
+    width: 16rem;
     padding: 5px;
     outline: none;
     background-color: rgba(193, 186, 161, .2); 

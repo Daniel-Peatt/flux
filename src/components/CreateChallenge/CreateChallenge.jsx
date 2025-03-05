@@ -23,7 +23,7 @@ function ChallengeTitle () {
     const handleClick = () => {
         console.log("Add task button has been clicked");
         if(taskfield) { // Prevents empty task from being added
-          setTasks([...tasks, taskfield]);
+          setTasks([taskfield, ...tasks]);
           setTaskField(""); // Clear the input field after adding task  
         }
         // Focus on the input field after submit
@@ -40,14 +40,16 @@ function ChallengeTitle () {
                     <div className={styles.box1_1}>
                         <input type="text" className={`${styles.titleField} ${styles.field}`} placeholder="Name your challenge here..." />
                         <textarea type="text" className={`${styles.intentionsField} ${styles.field}`} placeholder="Intentions for callenge..." />
-                        <label>Start Date</label>
-                        <input type="date" />
-                        <label>End Date</label>
-                        <input type="date" />  
-                    </div>
-                    <div className={styles.box1_2}>
-                        <div>
-                          <input 
+                        <div className={styles.row}>
+                            <h3 style={{marginLeft: "10px"}}>Start Date</h3>
+                            <input type="date" className={styles.field}/>                           
+                        </div>
+                        <div className={styles.row}>
+                            <h3 style={{marginLeft: "10px"}}>End Date</h3> 
+                            <input type="date" className={styles.field}/>                             
+                        </div>
+                        <div className={styles.row}>
+                           <input 
                             type="text" 
                             className={`${styles.addTaskField}`} 
                             placeholder="Add a task" 
@@ -58,9 +60,13 @@ function ChallengeTitle () {
                             type="button" 
                             value="Add" 
                             onClick={handleClick}
-                            className={`${styles.addTaskButton}`}
-                            />  
+                            className={`${styles.addTaskButton}`}/>  
                         </div>
+                         
+                    </div>
+                    <div className={styles.box1_2}>
+                        <div>
+
                         
                         <ul>
                             {tasks.map((task, index) => (
@@ -69,9 +75,17 @@ function ChallengeTitle () {
                                 </li>       
                             ))}
                         </ul>
+
+
+                        </div>
                     </div>                    
-                </div>                
-                <input type="submit" className={`${styles.submitButton}`} value="Submit"/> 
+                </div>    
+                <div className={styles.line}>
+                    <div className={styles.line1}></div> 
+                    <input type="submit" className={`${styles.submitButton}`} value="Submit"/> 
+                    <div className={styles.line2}></div> 
+                </div>            
+                
             </form>
             
         </div>

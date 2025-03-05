@@ -7,6 +7,8 @@ import NoPage from './pages/NoPage.js';
 import Dashboard from './pages/Dashboard.js';
 import CreateTitle from './pages/CreateChallenge.js';
 
+import "./App.css"
+
 function App() {
   
   return (

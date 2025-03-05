@@ -21,7 +21,6 @@ function Login () {
         try {
             // Change email to lower case, so it matches the DB standard
             const lowerCaseEmail = email.toLowerCase();
-            console.log(lowerCaseEmail);
 
             // Make sure email is properly set before making the request
             if (!email) {
@@ -70,13 +69,13 @@ function Login () {
                 <form className={styles.TextFields} onSubmit={onSubmitForm}>
                     <label className={styles.userNameLabel}> Email <br />
                         <input 
-                        className={styles.userName} 
+                        className={styles.field} 
                         type="text"
                         onChange={e => setEmail(e.target.value)} /> 
                     </label>
                     <label className={styles.passwordLabel}> Password <br />
                         <input 
-                        className={styles.password} 
+                        className={styles.field} 
                         type="password" 
                         onChange={e => setPassword_hash(e.target.value)}/> 
                     </label>

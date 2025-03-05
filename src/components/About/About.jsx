@@ -32,12 +32,12 @@ const About = () => {
             </form>
             <div>
                 {/* Data from database */}
-            <h1>Data from PostgreSQL</h1>
+            {/* <h1>Data from PostgreSQL</h1>
             <ul>
                 {data.map((item, index) => (
                 <li key={index}>{JSON.stringify(item)}</li>
                 ))}
-            </ul>
+            </ul> */}
             </div>
         </div>
         

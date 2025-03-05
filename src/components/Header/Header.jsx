@@ -8,9 +8,9 @@ function Header () {
     }
 
     return (
-        <div className={styles.Header}>
+        <header className={styles.Header}>
              <div onClick={goToHome} className={styles.icon}>Flux</div>
-        </div>
+        </header>
     )
 }
 
