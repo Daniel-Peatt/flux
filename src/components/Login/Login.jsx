@@ -43,12 +43,18 @@ function Login () {
             console.log(result);
             console.log(result.password_hash);
 
+            // if(result.row.length === 0) {
+            //     setErrorMessage("No account associated with email");
+            //     return;
+            // }
+
             // Password Check
             if(password_hash !== result.password_hash)
             {
                 setErrorMessage("Failed Login - Try again")
                 return;
             }
+            
 
             // Passing email to the next page
             navigate(`/CreateChallenge/${encodeURIComponent(email)}`);
