@@ -28,6 +28,22 @@ app.post("/CreateUser", async(req, res) => {
   }
 })
 
+// Add challenge information
+app.post("/create-challenge", async(req, res) => {
+  try {
+    const {user_id} = req.body;
+    const {title} = req.body;
+    const {intentions} = req.body;
+    const {start_date} = req.body;
+    const {end_date} = req.body;
+    const {is_active} = req.body;
+    const newChallenge = await pool.query(`INSERT INTO challenges (user_id, title, intentions, start_date, end_date, is_active) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`, [user_id, title, intentions, start_date, end_date, is_active]);
+    res.status(201).json({ message: "Challenge created successfully"});
+  } catch (err) {
+    console.error(err.message);
+  }
+})
+
 // Get all users 
 app.get("/users", async(req,res) => {
   try {

@@ -9,6 +9,7 @@
 KNOWN ISSUES
 
 CreateChallenge:
-    - Submit button shrinks when task list gets too long 
+    - Submit button shrinks when task list gets too long - DONE
     - When hitting enter on the task list have the task added, not submiting the whole form
 
+Start working on DB connections for the challenge form
