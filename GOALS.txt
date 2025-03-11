@@ -1,15 +1,13 @@
-1- Set up login and display "Hello {email}" - DONE 2/27
-2- Have the passwords verify on login. - DONE 3/1
-3- have all emails sent to the database be lowercase - DONE 3/1
-4- Create the visuals of a form that will create a challenge - DONE
-    - Add line through the submit button - DONE
-    - Find out a way to get the taskField selected after a submit - DONE
-    - Task should be added with a enter key
 
-KNOWN ISSUES
+### Goals / Work Log 
 
-CreateChallenge:
-    - Submit button shrinks when task list gets too long - DONE
-    - When hitting enter on the task list have the task added, not submiting the whole form
+Short Term Goals:
+    - Set up Obsidian on the desktop
+    - Have the create your challenge form post to the database through the client side
 
-Start working on DB connections for the challenge form
+Long Term Goals:
+    - Learn JWT Authentication for secure user login
+
+03-06-25 : I added the post api on the backend for sending form data to the database. COMMIT
+03-10-25 : I am having issues getting the create challenge form submitted to the database. something to do with 
+    null value for user_id in the row. 
