@@ -5,6 +5,10 @@
 const pool = require("./db");
 const cors = require("cors");
 const express = require("express"); // Framework 
+const jwt = require('jsonwebtoken'); // JWT Authenticaiton
+const bcrypt = require('bcrypt'); // Hashing passwords
+require('dotenv').config();
+
 const app = express();
 
 // Middleware
@@ -13,12 +17,65 @@ app.use(express.json()); // Enable JSON parsing
 
 // ROUTES // 
 
+// JWT Authentication Login
+app.post("/users/login", async(req, res) => {
+  const {email, password_hash} = req.body;
+
+  try {
+    // Authenticate User
+
+    // Get the user from the database
+    const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+    
+    // Check if user was found
+    if (result.rows.length === 0) {
+      return res.status(404).json({message: 'User not found'});
+    }
+
+    // Save user to a const
+    const user = result.rows[0];
+
+    // Verify Password
+    const isPasswordValid = await bcrypt.compare(password_hash, user.password_hash)
+
+    // If password is invalid
+    if(!isPasswordValid) {
+      return res.status(401).json({message: 'Invalid credentials'});
+    }
+
+    // Creating token
+    const accessToken = jwt.sign(
+      { userId: user.id, email: user.email }, 
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: "1h" } // Token expires in 1 hour
+    );
+
+    res.json({
+      message: 'Login successful',
+      accessToken,
+    });
+
+  } catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).json({message: 'Server error'});
+  }
+});
+
+// Middleware for user routing
+function authenticateToken(req, res, next) {
+
+}
+
 // Create a user 
 app.post("/CreateUser", async(req, res) => {
   try {
     const {email} = req.body;
     const {password_hash} = req.body;
-    const newUser = await pool.query(`INSERT INTO users (email, password_hash) VALUES ($1, $2) RETURNING *`, [email, password_hash]);
+    // Hashing password
+    const salt = await bcrypt.genSalt();
+    const hashPassword = await bcrypt.hash(password_hash, salt);
+
+    const newUser = await pool.query(`INSERT INTO users (email, password_hash) VALUES ($1, $2) RETURNING *`, [email, hashPassword]);
     res.status(201).json({ message: "User created successfully" });
   } catch (err) {
     if (err.code === "23505") {

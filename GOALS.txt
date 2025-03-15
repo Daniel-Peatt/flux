@@ -11,3 +11,9 @@ Long Term Goals:
 03-06-25 : I added the post api on the backend for sending form data to the database. COMMIT
 03-10-25 : I am having issues getting the create challenge form submitted to the database. something to do with 
     null value for user_id in the row. 
+03-11-25 : I finish the form for creating a challenge and the information goes to the database, besides the task. 
+    I also started to learn and work on JWT authentication. I believe if I impliment this now it will be less annoying 
+    than adding it later on. COMMIT 
+03-12-25 : I added password hashing on the POST to the database using bcrypt, I know need to un-hash the password for logining in, 
+    and continue videos on YT about JWT. 
+03-13-25 : I have added the login API that will compare the user info typed in to the info in the database, using bycrypt.compare.

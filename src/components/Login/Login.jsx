@@ -16,22 +16,23 @@ function Login () {
     // Used to navigate to the createAccount Route when button is pressed
     const onSubmitForm = async(e) => {
         e.preventDefault(); // Prevent default form submission behavior
-        
+        const body = {email: email.toLowerCase(), password_hash};
         
         try {
             // Change email to lower case, so it matches the DB standard
-            const lowerCaseEmail = email.toLowerCase();
+            //const lowerCaseEmail = email.toLowerCase();
 
             // Make sure email is properly set before making the request
-            if (!email) {
-                setErrorMessage("Failed Login - Try again")
-                return;
-            }
+            // if (!email) {
+            //     setErrorMessage("Failed Login - Try again")
+            //     return;
+            // }
 
             // Check if login information is in the database 
-            const response = await fetch(`http://localhost:5000/users/${encodeURIComponent(lowerCaseEmail)}`, {
-            method: "GET",
+            const response = await fetch(`http://localhost:5000/users/login`, {
+            method: "post",
             headers: {"content-type": "application/json"},
+            body: JSON.stringify(body)
         });
         if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -41,7 +42,7 @@ function Login () {
             // Sending response to the console
             const result = await response.json();
             console.log(result);
-            console.log(result.password_hash);
+            // console.log(result.password_hash);
 
             // if(result.row.length === 0) {
             //     setErrorMessage("No account associated with email");
@@ -49,15 +50,15 @@ function Login () {
             // }
 
             // Password Check
-            if(password_hash !== result.password_hash)
-            {
-                setErrorMessage("Failed Login - Try again")
-                return;
-            }
+            // if(password_hash !== result.password_hash)
+            // {
+            //     setErrorMessage("Failed Login - Try again")
+            //     return;
+            // }
             
 
             // Passing email to the next page
-            navigate(`/CreateChallenge/${encodeURIComponent(email)}`);
+            //navigate(`/CreateChallenge/${encodeURIComponent(email)}`);
 
 
         } catch (err) {
