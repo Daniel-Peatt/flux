@@ -71,7 +71,7 @@ function CreateAccountPage () {
             // If successful, routes the user to the CreateTitle page
             if (response.ok) {
                 // Navigate to the CreateTitle page after successful registration
-                navigate(`/CreateChallenge/${encodeURIComponent(email)}`); 
+                navigate('/'); 
             }
         } catch (err) {
             console.error(err.message);

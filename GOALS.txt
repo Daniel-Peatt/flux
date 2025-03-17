@@ -17,3 +17,10 @@ Long Term Goals:
 03-12-25 : I added password hashing on the POST to the database using bcrypt, I know need to un-hash the password for logining in, 
     and continue videos on YT about JWT. 
 03-13-25 : I have added the login API that will compare the user info typed in to the info in the database, using bycrypt.compare.
+03-14-25 : I added the creation of a token when the user logs in.
+    I then added the Middleware to authenticate the token and ensure it is still valid. (This can be added to api calls to get the logged in users info)
+    I created a get challenge api route that gets the user info based on a login token. 
+    I need to find out how to set up the page routes to recieve the token information.
+03-16-25 : I got the fetch call to the dashboard, and set up a grid / flex layout for the dashbaord. 
+    I need to get the task be sent to the database once when the create challenge is made. DONE
+    I need to parse the task to get them to show up separetly on a list. 

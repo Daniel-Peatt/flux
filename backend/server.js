@@ -19,7 +19,7 @@ app.use(express.json()); // Enable JSON parsing
 
 // JWT Authentication Login
 app.post("/users/login", async(req, res) => {
-  const {email, password_hash} = req.body;
+  const {email, password} = req.body;
 
   try {
     // Authenticate User
@@ -36,7 +36,7 @@ app.post("/users/login", async(req, res) => {
     const user = result.rows[0];
 
     // Verify Password
-    const isPasswordValid = await bcrypt.compare(password_hash, user.password_hash)
+    const isPasswordValid = await bcrypt.compare(password, user.password_hash);
 
     // If password is invalid
     if(!isPasswordValid) {
@@ -45,7 +45,7 @@ app.post("/users/login", async(req, res) => {
 
     // Creating token
     const accessToken = jwt.sign(
-      { userId: user.id, email: user.email }, 
+      { userId: user.id, email: user.email, isActive: user.is_active }, 
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "1h" } // Token expires in 1 hour
     );
@@ -63,8 +63,20 @@ app.post("/users/login", async(req, res) => {
 
 // Middleware for user routing
 function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1]; // Splits token into just the .env code
+  if (token == null) return res.status(401).json({ error: "Access token is missing" }); // Return JSON on error
 
+  // Verifies that the token is still valid
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    if (err) return res.status(403).json({ error: "Invalid or expired token" }); // Return JSON on error
+    req.user = user;
+    next(); // moves on from our middleware
+  })
 }
+
+// Check if challenge exist
+
 
 // Create a user 
 app.post("/CreateUser", async(req, res) => {
@@ -86,16 +98,36 @@ app.post("/CreateUser", async(req, res) => {
 })
 
 // Add challenge information
-app.post("/create-challenge", async(req, res) => {
+app.post("/create-challenge", authenticateToken, async(req, res) => {
   try {
-    const {user_id} = req.body;
+    const user_id = req.user.userId; // gets the user_id from the token
     const {title} = req.body;
     const {intentions} = req.body;
     const {start_date} = req.body;
     const {end_date} = req.body;
     const {is_active} = req.body;
-    const newChallenge = await pool.query(`INSERT INTO challenges (user_id, title, intentions, start_date, end_date, is_active) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`, [user_id, title, intentions, start_date, end_date, is_active]);
+    const {tasks} = req.body;
+    const newChallenge = await pool.query(`INSERT INTO challenges (user_id, title, intentions, start_date, end_date, is_active, tasks) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`, [user_id, title, intentions, start_date, end_date, is_active, tasks]);
     res.status(201).json({ message: "Challenge created successfully"});
+  } catch (err) {
+    console.error(err.message);
+  }
+})
+
+// Get challenge based on users using a token
+app.get("/challenge", authenticateToken, async(req, res) => {
+  try {
+  // Get all challange info from database
+  const challenges = await pool.query("SELECT * FROM challenges");
+
+  const userChallenges = challenges.rows.filter(challenge => challenge.user_id === req.user.userId);
+
+  if (userChallenges.length === 0) {
+    return res.json(null); // Return null if no challenges are found
+  }
+
+  res.json(userChallenges); // Otherwise, return the user challenges
+
   } catch (err) {
     console.error(err.message);
   }

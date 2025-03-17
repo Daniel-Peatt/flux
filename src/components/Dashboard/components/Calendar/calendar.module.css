@@ -1,0 +1,9 @@
+.box {
+    width: 80%;
+    height: 80%;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    padding-top: 2rem; 
+    background-color: rgb(227, 205, 163, .15);
+}

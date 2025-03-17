@@ -1,6 +1,7 @@
 import styles from "./CreateChallenge.module.css";
 import { useParams } from "react-router-dom";
 import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 function ChallengeTitle () {
     // References
@@ -16,40 +17,46 @@ function ChallengeTitle () {
     const [endDate, setEndDate] = useState("");
     const [isActive, setIsActive] = useState(true);
 
+    // Used for routing pages
+    const navigate = useNavigate();
+
     const onSubmitForm = async (e) => {
         e.preventDefault(); // keeps it from refreshing 
+
+        // Get the token from localStorage (or wherever it's stored)
+        const token = localStorage.getItem('accessToken');
+        console.log(token.isActive);
+
         try {
             console.log("Submit button has been clicked");
 
-            // Getting userID from database
-            const responseID = await fetch(`http://localhost:5000/users/${email}`, {
-                method: "get",
-                headers: {"content-type": "application/json"}, // Sets the type to JSON
-            });
-            const resultID = await responseID.json();
-            
-    
             // Information from form.
             const body = {
-                user_id: resultID.id, 
                 title,
                 intentions,
                 start_date: startDate,
                 end_date: endDate,
-                is_active: isActive};
+                is_active: isActive,
+                tasks
+            };
 
             console.log(body);
 
             // Sending the POST request to the database.
             const response = await fetch("http://localhost:5000/create-challenge", {
                 method: "post",
-                headers: {"content-type": "application/json"}, // Sets the type to JSON
+                headers: {
+                    "content-type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                }, // Sets the type to JSON
                 body: JSON.stringify(body)
             });
 
             // Sending response to the console
             const result = await response.json();
             console.log(result);
+
+            navigate('/Dashboard');
 
         } catch (err) {
             console.error(err.message);
