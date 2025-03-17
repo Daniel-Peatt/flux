@@ -2,11 +2,16 @@
 ### Goals / Work Log 
 
 Short Term Goals:
-    - Set up Obsidian on the desktop
-    - Have the create your challenge form post to the database through the client side
+    - 
 
 Long Term Goals:
-    - Learn JWT Authentication for secure user login
+    - 
+
+Features : 
+    - Change home screen if user is login in
+    - add logout Feature
+    - Fix create account and login errors
+    - Fix enter key on create challenge
 
 03-06-25 : I added the post api on the backend for sending form data to the database. COMMIT
 03-10-25 : I am having issues getting the create challenge form submitted to the database. something to do with 
@@ -24,3 +29,4 @@ Long Term Goals:
 03-16-25 : I got the fetch call to the dashboard, and set up a grid / flex layout for the dashbaord. 
     I need to get the task be sent to the database once when the create challenge is made. DONE
     I need to parse the task to get them to show up separetly on a list. 
+03-17-25 : Added pie chart to days reamining compomnent, and started to fix task list on dashbaord. 

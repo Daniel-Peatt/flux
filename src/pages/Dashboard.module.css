@@ -1,11 +1,9 @@
 .parentContainer {
     display: flex;
-    border: solid;
     justify-content: center;
 }
 
 .container {
-    border: solid;
     margin-top: 3rem;
     padding-top: 3rem;
     display: grid;
@@ -15,7 +13,7 @@
 }
 
 .item {
-    border: solid;
+    /* border: solid; */
     display: flex;
     justify-content: center;
 }

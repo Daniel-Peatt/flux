@@ -6,7 +6,8 @@
     display: flex;
     justify-content: center;
     padding-top: 2rem;
-    border-color: rgba(227, 205, 163, .5); 
+    border-color: rgba(227, 205, 163, .5);
+    flex-direction: column; 
 }
 
 .tasks {
@@ -15,4 +16,8 @@
 
 .task {
     padding-top: 1rem;
+}
+
+ul {
+    border: solid;
 }

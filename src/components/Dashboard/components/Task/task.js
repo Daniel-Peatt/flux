@@ -10,7 +10,9 @@ import useFetch from "../../../../hooks/useFetch"; // Import the custom hook
 const Task = () => {
     // Fetching data from the challenge table. 
     const token = localStorage.getItem('accessToken'); // Get token from localStorage
-    const { data: data, loading, error } = useFetch('http://localhost:5000/challenge', token);
+    const { data: results, loading, error } = useFetch('http://localhost:5000/challenge', token);
+
+    const firstChallenge = results && results.length > 0 ? results[0] : null;
 
       // While loading, display a loading message
       if (loading) {
@@ -26,19 +28,14 @@ const Task = () => {
     
     return (
         <div className={styles.box}>
-            {/* I do not understand this one, but it allows me to display data from the database */}
-            {Array.isArray(data) && data.length > 0 ? (
-                data.map((item, index) => (
-                    <div key={index}>
-                        <h2>{item.title || "No title available"}</h2>
-                        <ul className={styles.tasks}>
-                            <li className={styles.task}>{data.tasks}</li>
-                        </ul>              
-                    </div>
-                ))
-            ) : (
-                <div>No data available</div>
-            )}
+            
+            <h2>{firstChallenge.title || "No title available"}</h2>
+            <ul>
+                <li>{firstChallenge.tasks}</li>
+                <li>{firstChallenge.tasks}</li>
+                <li>{firstChallenge.tasks}</li>
+            </ul>
+          
         </div>
     );
 }
