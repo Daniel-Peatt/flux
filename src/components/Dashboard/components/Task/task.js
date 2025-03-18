@@ -1,6 +1,3 @@
-// imports
-import { useEffect } from 'react';
-
 //styles
 import styles from "./task.module.css";
 
@@ -23,17 +20,34 @@ const Task = () => {
     if (error) {
         return <div>Error: {error}</div>;
     }
-
- 
     
+    // Parse the tasks JSON string
+    let tasks = [];
+    if (firstChallenge && firstChallenge.tasks) {
+        try {
+            // Fix the format by replacing curly braces with square brackets
+            const fixedTasks = firstChallenge.tasks.replace(/^{/, '[').replace(/}$/, ']');
+            tasks = JSON.parse(fixedTasks);
+        } catch (e) {
+            console.error("Failed to parse tasks JSON:", e);
+        }
+    }
+    
+       
     return (
         <div className={styles.box}>
             
-            <h2>{firstChallenge.title || "No title available"}</h2>
+            <h2 className={styles.title}>{firstChallenge.title || "No title available"}</h2>
             <ul>
-                <li>{firstChallenge.tasks}</li>
-                <li>{firstChallenge.tasks}</li>
-                <li>{firstChallenge.tasks}</li>
+                {tasks.map((task, index) => (
+                    <div className={styles.taskRow}>
+                        <label className={styles.checkBox}>
+                        <input key={index + 'checkbox'} type='checkbox'/>
+                        <span></span>
+                        </label>
+                        <li key={index} className={styles.tasks}>{task}</li>
+                    </div>
+                ))}
             </ul>
           
         </div>

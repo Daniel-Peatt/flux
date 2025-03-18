@@ -4,20 +4,59 @@
     height: 80%;
     border-radius: 50px;
     display: flex;
-    justify-content: center;
     padding-top: 2rem;
     border-color: rgba(227, 205, 163, .5);
     flex-direction: column; 
+    align-items: center;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+    color: #EAE2C6;
+}
+
+.taskRow {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    border-color: rgba(227, 205, 163, .5);
+    border-radius: 10px;
+    margin: 1rem;
+    font-size: large;
+    font-weight: bold;
+    color: #EAE2C6;
 }
 
 .tasks {
-    text-align: center;
+    display: flex;
+    /* align-items: center; */
+    font-size: 1.5rem;
+    justify-content: flex-start;
+    width: 100%;
+    padding-left: 1rem;
 }
 
-.task {
-    padding-top: 1rem;
+/* Hide default checkbox */
+.checkBox input {
+    display: none;
 }
 
-ul {
-    border: solid;
+.checkBox span {
+  display: inline-block;
+  width: 20px; /* Adjust size */
+  height: 20px;
+  border-radius: 50%; /* Makes it a circle */
+  border: 2px solid #333; /* Border color */
+  position: relative;
+  cursor: pointer;
+  border-color: rgba(255, 255, 255, 0.829);
+  border-width: .2rem;
 }
+
+.checkBox input:checked + span {
+    background-color: #49483c; /* Change background when checked */
+    border-width: .2rem;
+}
+
