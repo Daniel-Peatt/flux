@@ -9,6 +9,18 @@ function Calendar () {
     const token = localStorage.getItem('accessToken'); // Get token from localStorage
     const { data: results, loading, error } = useFetch('http://localhost:5000/challenge', token);
 
+    // Store start_date and end_date in variables
+    const startDate = results && results.length > 0 ? results[0].start_date : null; 
+    const endDate = results && results.length > 0 ? results[0].end_date : null;
+
+    // Calculate days remaining and total days
+    const now = new Date();
+    const daysRemaining = endDate ? Math.ceil((new Date(endDate) - now) / (1000 * 60 * 60 * 24)) : 0;
+    const totalDays = startDate && endDate ? Math.ceil((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24)) : 0;
+    const daysCompleted = totalDays - daysRemaining;
+    console.log(daysRemaining, totalDays, daysCompleted);
+
+
         // While loading, display a loading message
         if (loading) {
         return <div>Loading...</div>;
@@ -21,17 +33,13 @@ function Calendar () {
 
     return (
         <div className={styles.box}>
-            {/* I do not understand this one, but it allows me to display data from the database */}
-            {Array.isArray(results) && results.length > 0 ? (
-                results.map((item, index) => (
-                    <div key={index}>
-                        <h2>{item.start_date || "No title available"}</h2>
-                                  
+            <div className={styles.calendar} style={{gridTemplateRows: `repeat(${totalDays / 7}, 1fr [col-start])` }}>
+                {Array.from({ length: totalDays }, (_, index) => (
+                    <div key={index} className={styles.cell}>
+                        {index}
                     </div>
-                ))
-            ) : (
-                <div>No data available</div>
-            )}
+                ))}
+            </div>         
         </div>
     )
 }

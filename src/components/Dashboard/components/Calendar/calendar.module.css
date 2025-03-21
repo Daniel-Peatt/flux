@@ -1,9 +1,53 @@
 .box {
     width: 80%;
-    height: 80%;
+    height: 30rem;
+    padding-top: 2rem;
     border-radius: 50px;
     display: flex;
     justify-content: center;
-    padding-top: 2rem; 
+    align-items: center;
     background-color: rgb(227, 205, 163, .15);
+    /* Allows overflow data to seen by scrolling */
+    overflow-y: auto;
+}
+
+/* Width of the entire scroll-bar */
+.box::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Makes the scroll bar track invisible */
+.box::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Rounded edges on the thumb and a shadow on the inside of it */
+.box::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.5); 
+}
+
+/* Created a margin so the thumb doesnt go outside the div  */
+.box::-webkit-scrollbar-track-piece:end {
+    margin-bottom: 50px; 
+}
+
+.box::-webkit-scrollbar-track-piece:start {
+    margin-top: 50px;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    width: 80%;
+    height: 90%;
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: .20rem;
 }

@@ -25,15 +25,15 @@ export default function Dashboard () {
     }
 
     return (
-        <div className={styles.parentContainer}>
+        
             <div className={styles.container}>   
                 <Header />
                 {/* Render the challenge info */}
                 {/* <div>{results ? JSON.stringify(results) : "No data available"}</div> */}
                 <div className={`${styles.item1} ${styles.item}`}><Task /></div>
                 <div className={`${styles.item2} ${styles.item}`}><Calendar /></div>
-                <div className={`${styles.item3} ${styles.item}`}><DaysRemaining /></div>       
+                <div className={`${styles.item3} ${styles.item}`}><DaysRemaining /></div>        
             </div>
-        </div>
+        
     );
 }

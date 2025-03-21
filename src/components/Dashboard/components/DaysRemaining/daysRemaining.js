@@ -39,7 +39,6 @@ function DaysRemaining () {
     const daysRemaining = firstChallenge && firstChallenge.end_date ? Math.ceil((new Date(firstChallenge.end_date) - now) / (1000 * 60 * 60 * 24)) : 0;
     const totalDays = firstChallenge && firstChallenge.start_date && firstChallenge.end_date ? Math.ceil((new Date(firstChallenge.end_date) - new Date(firstChallenge.start_date)) / (1000 * 60 * 60 * 24)) : 0;
     const daysCompleted = totalDays - daysRemaining;
-    console.log(daysRemaining, totalDays, daysCompleted);
 
     // Pie chart data
     const data = {

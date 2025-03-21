@@ -21,9 +21,6 @@ function useFetch(url, token) {
                 }
 
                 const result = await response.json();
-                console.log("useFetch hook results: ");
-                console.log(result);
-
                 
                 setData(result); // Store data in state
                 setLoading(false); // Set loading to false

@@ -40,12 +40,12 @@ const Task = () => {
             <h2 className={styles.title}>{firstChallenge.title || "No title available"}</h2>
             <ul>
                 {tasks.map((task, index) => (
-                    <div className={styles.taskRow}>
+                    <div className={styles.taskRow} key={index} >
                         <label className={styles.checkBox}>
-                        <input key={index + 'checkbox'} type='checkbox'/>
+                        <input type='checkbox'/>
                         <span></span>
                         </label>
-                        <li key={index} className={styles.tasks}>{task}</li>
+                        <li className={styles.tasks}>{task}</li>
                     </div>
                 ))}
             </ul>

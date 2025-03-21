@@ -1,28 +1,30 @@
-.parentContainer {
-    display: flex;
-    justify-content: center;
-}
 
 .container {
+    /* Keeps the content in the center */
     margin-top: 3rem;
-    padding-top: 3rem;
-    display: grid;
-    grid-template-rows: 30rem 30rem 30rem;
-    grid-template-columns: 30rem 30rem 30rem;
     
+    margin-left: auto;
+    margin-right: auto;
+    /* Setting a width for the content */
+    width: 1280px;
+    display: flex;
+    border: solid;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+
 }
 
 .item {
     /* border: solid; */
     display: flex;
     justify-content: center;
+    width: 30rem;
+    padding-top: 3rem;
 }
 
 .item1 {
-    grid-row-start: 1;
-    grid-row-end: 3;
-    grid-column-start: 1;
-    grid-column-end: 2;
+
 }
 
 .item2 {
@@ -31,4 +33,11 @@
 
 .item3 {
 
+}
+
+@media (max-width: 800px) {
+    .container {
+        width: 600px;
+
+    }
 }
