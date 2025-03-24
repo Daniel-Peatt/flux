@@ -3,8 +3,10 @@
     height: 50px;
     color: #EAE2C6 ;
     font-size: 35px;
-    padding-left: 40px;
+    border: solid;
+    
     display: flex;
+    justify-content: space-between;
     align-items: center;
     position: fixed;
     width: 100%;
@@ -16,6 +18,12 @@
 
 .icon {
     cursor: pointer;
+    padding-left: 3rem;
+}
+
+.links {
+    cursor: pointer;
+    padding-right: 3rem;
 }
 
 /* .Header {

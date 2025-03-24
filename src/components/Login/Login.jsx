@@ -1,6 +1,7 @@
 import styles from "./Login.module.css";
-import React, {useState} from "react"; 
+import React, {useEffect, useState} from "react"; 
 import { useNavigate } from "react-router-dom";
+import { checkLoginStatus } from "../../utils";
 
 
 function Login () {
@@ -8,10 +9,20 @@ function Login () {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const [isLoggedIn, setIsLoggedIn] = useState("");
 
     // Used for routing pages
     const navigate = useNavigate();
 
+    /* The useEffect below runs this function to set a state to true or false
+     if a token is stored in local storage. I then use that state in the return
+     to conditional load the login component depending if the user is logged in. */
+
+
+    // Runs the checkLogin once on load
+    useEffect(() => {
+        setIsLoggedIn(checkLoginStatus());
+    }, [isLoggedIn]);
 
     // Saves the value of information in the text-fields to a varible
     // Used to navigate to the createAccount Route when button is pressed
@@ -20,14 +31,6 @@ function Login () {
         const body = {email: email.toLowerCase(), password};
         
         try {
-            // Change email to lower case, so it matches the DB standard
-            //const lowerCaseEmail = email.toLowerCase();
-
-            // Make sure email is properly set before making the request
-            // if (!email) {
-            //     setErrorMessage("Failed Login - Try again")
-            //     return;
-            // }
             // Check if login information is in the database 
             const response = await fetch(`http://localhost:5000/users/login`, {
             method: "post",
@@ -35,32 +38,21 @@ function Login () {
             body: JSON.stringify(body)
             });
             if (!response.ok) {
+                setErrorMessage("Login failed");
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
                     
-            // Sending response to the console
+            // Saving results for storage later
             const result = await response.json();
-            console.log(result);
-
-            // Save the token if needed (like in localStorage)
+            
+            // Storing token in local storage
             localStorage.setItem("accessToken", result.accessToken);
-            // console.log(result.password_hash);
 
-            // if(result.row.length === 0) {
-            //     setErrorMessage("No account associated with email");
-            //     return;
-            // }
-
-            // Password Check
-            // if(password_hash !== result.password_hash)
-            // {
-            //     setErrorMessage("Failed Login - Try again")
-            //     return;
-            // }
+            //  -------------- Retrieves the login token and uses that token to check if the databse has a challenges associated with the users account ------------------
 
             // Get the token from localStorage (or wherever it's stored)
             const token = localStorage.getItem('accessToken');
-            
+    
             const doesChallengeExist = await fetch('http://localhost:5000/challenge', {
                 method: 'get',
                 headers: {
@@ -68,26 +60,21 @@ function Login () {
                     "Authorization": `Bearer ${token}`,
                 }
             });
-            const result2 = await doesChallengeExist.json();
-            console.log(result2);
-            if (result2 == null) {
+            const isChallenge = await doesChallengeExist.json();
+            if (isChallenge == null) {
                 navigate('/CreateChallenge');
             }
             else {
                 navigate('/Dashboard');
             }
-            // Passing email to the next page
-            
-
 
         } catch (err) {
             console.error("Login Error:", err);
-        }
-        
+        }        
     }
 
     return (
-        <div className={styles.Login}>
+        <div className={styles.Login}>{!isLoggedIn && 
             <div> 
                 <div className={styles.loginTitle}>
                     Log in
@@ -111,7 +98,7 @@ function Login () {
                    
                 </form>
                 {errorMessage && <p className={styles.error}>{errorMessage}</p>}
-            </div>
+            </div>}
         </div>
     );
 }

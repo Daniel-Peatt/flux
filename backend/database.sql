@@ -6,6 +6,7 @@ CREATE TABLE challenges (
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
     is_active BOOLEAN NOT NULL DEFAULT FALSE,
+    tasks TEXT NOT NULL, 
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 

@@ -1,5 +1,5 @@
 // CSS
-import styles from "./daysRemaining.module.css";
+import styles from "./DaysRemaining.module.css";
 
 // Custom Hooks
 import useFetch from "../../../../hooks/useFetch"; // Import the custom hook

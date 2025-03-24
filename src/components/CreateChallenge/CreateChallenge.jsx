@@ -1,11 +1,9 @@
 import styles from "./CreateChallenge.module.css";
-import { useParams } from "react-router-dom";
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 function ChallengeTitle () {
     // References
-    const { email } = useParams(); // Extract the email from the URL
     const inputRef = useRef(null); // Create a reference for the input field
 
     // useStates
@@ -15,7 +13,7 @@ function ChallengeTitle () {
     const [intentions, setIntentions] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
-    const [isActive, setIsActive] = useState(true);
+    
 
     // Used for routing pages
     const navigate = useNavigate();
@@ -25,10 +23,13 @@ function ChallengeTitle () {
 
         // Get the token from localStorage (or wherever it's stored)
         const token = localStorage.getItem('accessToken');
-        console.log(token.isActive);
 
         try {
-            console.log("Submit button has been clicked");
+            console.log("Submit button for createChallenge has been clicked");
+
+            if (e.key === "Enter") {
+                return;
+            }
 
             // Information from form.
             const body = {
@@ -36,7 +37,7 @@ function ChallengeTitle () {
                 intentions,
                 start_date: startDate,
                 end_date: endDate,
-                is_active: isActive,
+                is_active: true,
                 tasks
             };
 
@@ -72,6 +73,13 @@ function ChallengeTitle () {
         // Focus on the input field after submit
         // Reference needs to be on the text field too
         inputRef.current.focus();
+    }
+    
+    // If the enter key is pressed while in the task field, this will route it to the handleClick function. 
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            handleClick();
+        }
     }
 
     return (
@@ -116,12 +124,14 @@ function ChallengeTitle () {
                                 placeholder="Add a task" 
                                 value={taskfield}
                                 ref={inputRef} // Attach the ref to the input
-                                onChange={(e) => setTaskField(e.target.value)}/>
+                                onChange={(e) => setTaskField(e.target.value)}
+                                onKeyDown={handleKeyPress}/>   
                             <input 
                                 type="button" 
                                 value="Add" 
                                 onClick={handleClick}
-                                className={`${styles.addTaskButton}`}/>  
+                                className={`${styles.addTaskButton}`}
+                                />  
                         </div>                        
                     </div>
                     <div className={styles.box1_2}>
@@ -140,7 +150,12 @@ function ChallengeTitle () {
                 </div>    
                 <div className={styles.line}>
                     <div className={styles.line1}></div> 
-                    <input type="submit" className={`${styles.submitButton}`} value="Submit"/> 
+                    <input 
+                        type="submit" 
+                        className={`${styles.submitButton}`} 
+                        value="Submit"
+                        onKeyDown={(e) => {e.key === 'Enter' && e.preventDefault();}} // Prevents the entire form from submitting by pressing enter
+                        /> 
                     <div className={styles.line2}></div> 
                 </div>            
                 

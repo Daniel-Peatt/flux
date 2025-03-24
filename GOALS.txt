@@ -11,7 +11,8 @@ Features :
     - Change home screen if user is login in
     - add logout Feature
     - Fix create account and login errors
-    - Fix enter key on create challenge
+    - Add method to delete challenge
+    - Take notes on how event handlers work. 
 
 03-06-25 : I added the post api on the backend for sending form data to the database. COMMIT
 03-10-25 : I am having issues getting the create challenge form submitted to the database. something to do with 

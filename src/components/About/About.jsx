@@ -1,18 +1,7 @@
 import styles from "./About.module.css";
 import { useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
-
 
 const About = () => {
-    const [data, setData] = useState([]);
-    
-    useEffect(() => {
-        fetch("http://localhost:5000/users")
-          .then((response) => response.json())
-          .then((json) => setData(json))
-          .catch((error) => console.error("Error fetching data:", error));
-      }, []);
-
     // Used to navigate to the createAccount Route when button is pressed
     const navigate = useNavigate();
     const goToCreateAccount = () => {
@@ -30,15 +19,6 @@ const About = () => {
             <form className={styles.buttonBox}>
                 <input onClick={goToCreateAccount} className={styles.button} type="button" value="Get Started"/>
             </form>
-            <div>
-                {/* Data from database */}
-            {/* <h1>Data from PostgreSQL</h1>
-            <ul>
-                {data.map((item, index) => (
-                <li key={index}>{JSON.stringify(item)}</li>
-                ))}
-            </ul> */}
-            </div>
         </div>
         
   

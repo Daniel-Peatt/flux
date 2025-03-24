@@ -120,6 +120,7 @@ app.get("/challenge", authenticateToken, async(req, res) => {
   // Get all challange info from database
   const challenges = await pool.query("SELECT * FROM challenges");
 
+  // Getting users challenge by comparing tokens id with id from the sql query above
   const userChallenges = challenges.rows.filter(challenge => challenge.user_id === req.user.userId);
 
   if (userChallenges.length === 0) {
@@ -176,6 +177,18 @@ app.delete("/users/:id", async(req,res) => {
     console.error(err.message);
   }
 })
+
+//Delete challenge
+app.delete("/deleteChallenge",authenticateToken, async(req,res) => {
+  try {
+    // Delete user's challenge
+    const deleteChallenges = await pool.query(`DELETE FROM challenges WHERE user_id = $1`, [req.user.userId]);
+    res.json("Challenge has been deleted");
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ error: "Server error while deleting challenge" });
+  }
+});
 
 
 

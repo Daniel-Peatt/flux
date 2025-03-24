@@ -1,5 +1,5 @@
 //styles
-import styles from "./task.module.css";
+import styles from "./Task.module.css";
 
 // Custom Hooks
 import useFetch from "../../../../hooks/useFetch"; // Import the custom hook

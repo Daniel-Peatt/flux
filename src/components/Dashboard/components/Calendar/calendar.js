@@ -1,4 +1,4 @@
-import styles from "./calendar.module.css";
+import styles from "./Calendar.module.css";
 
 // Custom Hooks
 import useFetch from "../../../../hooks/useFetch"; // Import the custom hook
