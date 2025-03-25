@@ -17,10 +17,14 @@ function Header () {
     return (
         <header className={styles.Header}>
              <div onClick={goToHome} className={styles.icon}>Flux</div>
-             <div className={styles.links}>
-                <div onClick={logOut}>Log out</div>
-             </div>
-             
+             <nav className={styles.dropdown}>
+                <button className={styles.button}>Menu</button>
+                <div className={styles.links}>
+                    <a>Profile</a>
+                    <a>Dashboard</a>
+                    <a onClick={logOut}>Log out</a>
+                </div>
+             </nav>
         </header>
     )
 }

@@ -1,10 +1,7 @@
 .Header {
-    background-color: rgba(227, 205, 163, .5);
+    background-color: #a79779;
     height: 50px;
     color: #EAE2C6 ;
-    font-size: 35px;
-    border: solid;
-    
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -19,25 +16,47 @@
 .icon {
     cursor: pointer;
     padding-left: 3rem;
+    font-size: 35px;
 }
 
-.links {
+/* Dropdown */
+.dropdown {
+    margin-right: 10px;
+}
+
+.dropdown button {
+    background-color: #a79779;
+    color: white;
+    padding: 10px 15px;
+    border: none;
     cursor: pointer;
-    padding-right: 3rem;
+    vertical-align: middle;
+    font-size: large;
 }
 
-/* .Header {
-    background-color: rgba(227, 205, 163, 0.5); @
-    height: 50px;@
-    color: #EAE2C6;@
-    display: flex;@
-    align-items: center;@
-    font-size: 35px;@
-    padding-left: 40px;@
-    position: fixed;@
-    width: 100%;@
-    z-index: 1000;@
-    top: 0; @
-    left: 0;@
-    backdrop-filter: blur(10px); 
-} */
+.dropdown button:hover {
+    background-color: #bcb7a5;
+}
+
+.dropdown a {
+    display: block;
+    color: black;
+    padding: 10px 15px;
+    width: 200px;
+}
+
+.dropdown .links {
+    display: none; /* Defaults hide the dropdown */
+    background-color: #a9a38f;
+    position: absolute; /* Ensures that the dropdown shows on top of the webpage */
+    box-shadow: 2px 2px 5px black;
+    right: 0; /* This keeps the dropdown from overflowing over the right side of the screen */
+}
+
+.dropdown:hover .links {
+        display: block; /* Unhides dropdown when mouse is hovered over button*/
+}  
+
+.dropdown a:hover {
+    background-color: #eae2c7;
+}

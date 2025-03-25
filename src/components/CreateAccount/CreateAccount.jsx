@@ -111,7 +111,6 @@ function CreateAccountPage () {
                         className={styles.button} 
                         value="Submit"/>
                     </div>
-                   
                 </form>
 
                 {errorMessage && <p className={styles.error}>{errorMessage}</p>}
