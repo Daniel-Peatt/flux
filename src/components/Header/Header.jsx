@@ -1,7 +1,13 @@
 import styles from "./Header.module.css";
 import { useNavigate } from "react-router-dom";
+import { checkLoginStatus } from "../../utils";
+import { useState } from "react";
 
 function Header () {
+    const [isLoggedIn, setIsLoggedIn] = useState(checkLoginStatus());
+    // Check if the user is logged in
+
+
     const navigate = useNavigate();
     const goToHome = () => {
         navigate("/");
@@ -14,15 +20,22 @@ function Header () {
         window.location.reload(true); // Reloads the home page to ensure conditional components load 
     }
 
+    const goToDashboard = () => {
+        navigate("/Dashboard");
+    }
+
     return (
         <header className={styles.Header}>
              <div onClick={goToHome} className={styles.icon}>Flux</div>
              <nav className={styles.dropdown}>
                 <button className={styles.button}>Menu</button>
                 <div className={styles.links}>
-                    <a>Profile</a>
-                    <a>Dashboard</a>
-                    <a onClick={logOut}>Log out</a>
+                    {/* Will only show up if the user is logged in */} 
+                    { isLoggedIn && <a>Profile</a> }
+                    { isLoggedIn && <a onClick={goToDashboard}>Dashboard</a> }
+                    { isLoggedIn && <a onClick={logOut}>Log out</a> }
+                    <a>Contact us</a>
+                    <a>About us</a>
                 </div>
              </nav>
         </header>

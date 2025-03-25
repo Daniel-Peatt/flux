@@ -140,6 +140,7 @@ function ChallengeTitle () {
                             {tasks.map((task, index) => (
                                 <li key={index} className={styles.taskList}>
                                     {task}
+                                    <button>X</button>
                                 </li>       
                             ))}
                         </ul>
