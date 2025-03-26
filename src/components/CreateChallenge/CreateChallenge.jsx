@@ -98,7 +98,7 @@ function ChallengeTitle () {
                         <textarea 
                             type="text" 
                             className={`${styles.intentionsField} ${styles.field}`} 
-                            placeholder="Intentions for callenge..." 
+                            placeholder="Intentions for challenge..." 
                             onChange={e => setIntentions(e.target.value)}
                         />
                         <div className={styles.row}>
@@ -138,10 +138,12 @@ function ChallengeTitle () {
                         <div>
                         <ul>
                             {tasks.map((task, index) => (
-                                <li key={index} className={styles.taskList}>
-                                    {task}
-                                    <button>X</button>
-                                </li>       
+                                <div className={styles.taskRow}>
+                                    <li key={index} className={styles.taskList}>
+                                        {task}
+                                    </li>     
+                                    <button className={styles.taskButton}>X</button>  
+                                </div>
                             ))}
                         </ul>
 

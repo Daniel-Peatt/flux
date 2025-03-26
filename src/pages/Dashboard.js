@@ -6,8 +6,30 @@ import Header from "../components/Header/Header.jsx";
 import Tasks from "../components/Dashboard/components/Task/Tasks.js";
 import Calendar from "../components/Dashboard/components/Calendar/Calendar.js";
 import DaysRemaining from "../components/Dashboard/components/DaysRemaining/DaysRemaining.js";
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard () {
+
+    // Used for routing pages
+    const navigate = useNavigate();
+
+    const token = localStorage.getItem('accessToken'); // Get token from localStorage
+    const deleteChallenge = async() => { 
+        try {
+            const response = await fetch("http://localhost:5000/deleteChallenge", {
+                method: 'DELETE',
+                headers: {
+                    "Authorization": `Bearer ${token}`, // Add the token
+                },
+            });
+            console.log(response);
+
+            navigate("/CreateChallenge");
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
+
     return (
         <div>
             <div className={styles.container}>   
@@ -18,7 +40,9 @@ export default function Dashboard () {
                 <div className={`${styles.item2} ${styles.item}`}><Calendar /></div>
                 <div className={`${styles.item3} ${styles.item}`}><DaysRemaining /></div>                     
             </div>
-            <div className={styles.deleteChallenge}>Delete challenge</div> 
+                <div className={styles.footer}>
+                    <button className={styles.deleteChallengeButton} onClick={deleteChallenge}>Delete challenge</button>
+                </div> 
         </div>    
         
     );

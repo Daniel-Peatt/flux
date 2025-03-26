@@ -133,6 +133,19 @@
     overflow-wrap: break-word; /* Ensures proper wrapping */
 }
 
+.taskRow {
+    display: flex;
+    border: solid;
+    align-items: center;
+}
+
+.taskButton {
+    border: solid;
+    height: 80%;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
 ul {
     list-style: none; /* Removes default bullets */
     padding: 0;

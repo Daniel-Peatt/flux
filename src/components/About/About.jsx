@@ -12,7 +12,7 @@ const About = () => {
         <div className={styles.About}>
             <h1 className={styles.title}>Your Goals <br /> Your Way</h1>
             <p className={styles.message}>Unleash your potential with a platform designed to empower you to create, 
-                track, and conquer your personal Goals
+                track, and conquer your personal goals
                 and challenges. Whether your're striving for fitness milestones, professional 
                 growth, or personal development, Flux puts you in control. 
             </p>

@@ -2,40 +2,44 @@
 .container {
     /* Keeps the content in the center */
     margin-top: 3rem;
-    
     margin-left: auto;
     margin-right: auto;
     /* Setting a width for the content */
     width: 1280px;
     display: flex;
-    border: solid;
     flex-wrap: wrap;
     justify-content: center;
-    
-
+    border-bottom: solid;
+    padding-bottom: 2rem;
 }
 
 .item {
-    /* border: solid; */
     display: flex;
     justify-content: center;
     width: 30rem;
     padding-top: 3rem;
 }
 
-.deleteChallenge {
+.deleteChallengeButton {
+    cursor: pointer;
+    border: none;
+    background-color: #EAE2C6;
+    color: black;
+    padding: 10px 15px;
+}
+
+.footer {
     display: flex;
-    border: solid;
     width: 1280px;
     justify-content: flex-end;
     margin-left: auto;
     margin-right: auto;
-    cursor: pointer;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
 }
 
 @media (max-width: 800px) {
     .container {
         width: 600px;
-
     }
 }
