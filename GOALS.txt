@@ -33,4 +33,7 @@ Features :
 03-17-25 : Added pie chart to days reamining compomnent, and started to fix task list on dashbaord. 
 03-18-25 : Got the task component to populate on the dashboard. -COMMIT 
 03-19-25 : GOAl: Display the Calendar numbers.
-    
+03-24-25 : Today I added a drop down on the header for links around the app. I also made some of the links only visable
+    when the user is logged in. I need to add the code to get the delete challenge button working. 
+03-25-25 : Today I added the button to delete the challenge. I need to route the dashboard button in the drop down 
+    to go to the createChallenge page when there is no challenge linked to that user.
