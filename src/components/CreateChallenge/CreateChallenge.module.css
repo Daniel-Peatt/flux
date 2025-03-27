@@ -135,15 +135,23 @@
 
 .taskRow {
     display: flex;
-    border: solid;
     align-items: center;
 }
 
-.taskButton {
-    border: solid;
-    height: 80%;
+.taskDeleteButton {
+    display: flex;
+    justify-content: center;
     align-items: center;
+    height: 2rem;
+    width: 2rem;
+    font-size: large;
     margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.taskDeleteButton:hover {
+    font-size: x-large;
+    color: red;
 }
 
 ul {
@@ -216,5 +224,10 @@ h3 {
     .titleField {
         width: 100%;
     }
+}
+
+.error {
+ text-align: center;
+ color: red;
 }
 

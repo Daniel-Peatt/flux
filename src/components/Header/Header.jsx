@@ -1,11 +1,13 @@
 import styles from "./Header.module.css";
 import { useNavigate } from "react-router-dom";
-import { checkLoginStatus } from "../../utils";
+import { checkLoginStatus, useChallengeExist } from "../../utils";
 import { useState } from "react";
 
 function Header () {
     const [isLoggedIn, setIsLoggedIn] = useState(checkLoginStatus());
     // Check if the user is logged in
+    
+    const activeChallenge = useChallengeExist();
 
 
     const navigate = useNavigate();
@@ -19,9 +21,15 @@ function Header () {
         navigate("/"); // Navigates user back to the front page after loging out
         window.location.reload(true); // Reloads the home page to ensure conditional components load 
     }
-
-    const goToDashboard = () => {
-        navigate("/Dashboard");
+    
+    const goToDashboard = () => {  
+        if (activeChallenge === true) {
+          navigate("/Dashboard");  
+        }
+        else {
+            navigate("/CreateChallenge");
+        }
+        
     }
 
     return (
@@ -31,11 +39,11 @@ function Header () {
                 <button className={styles.button}>Menu</button>
                 <div className={styles.links}>
                     {/* Will only show up if the user is logged in */} 
-                    { isLoggedIn && <a>Profile</a> }
-                    { isLoggedIn && <a onClick={goToDashboard}>Dashboard</a> }
-                    { isLoggedIn && <a onClick={logOut}>Log out</a> }
-                    <a>Contact us</a>
-                    <a>About us</a>
+                    { isLoggedIn && <div>Profile</div> }
+                    { isLoggedIn && <div onClick={goToDashboard}>Dashboard</div> }
+                    <div>Contact us</div>
+                    <div>About us</div>
+                    { isLoggedIn && <div onClick={logOut}>Log out</div> }
                 </div>
              </nav>
         </header>

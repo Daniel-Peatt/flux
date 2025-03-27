@@ -38,7 +38,7 @@
     background-color: #bcb7a5;
 }
 
-.dropdown a {
+.dropdown div div {
     display: block;
     color: black;
     padding: 10px 15px;
@@ -57,6 +57,6 @@
         display: block; /* Unhides dropdown when mouse is hovered over button*/
 }  
 
-.dropdown a:hover {
+.dropdown div div:hover {
     background-color: #eae2c7;
 }

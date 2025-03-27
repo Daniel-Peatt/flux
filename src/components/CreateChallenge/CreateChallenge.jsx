@@ -9,10 +9,11 @@ function ChallengeTitle () {
     // useStates
     const [tasks, setTasks] = useState([]);
     const [taskfield, setTaskField] = useState("");
-    const [title, setTitle] = useState("");
-    const [intentions, setIntentions] = useState("");
-    const [startDate, setStartDate] = useState("");
-    const [endDate, setEndDate] = useState("");
+    const [title, setTitle] = useState(null);
+    const [intentions, setIntentions] = useState(null);
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
+    const [errorMessage, setErrorMessage] = useState("");
     
 
     // Used for routing pages
@@ -27,7 +28,13 @@ function ChallengeTitle () {
         try {
             console.log("Submit button for createChallenge has been clicked");
 
+            // Prevents the user from submitting the form by pressing enter.
             if (e.key === "Enter") {
+                return;
+            }
+
+            if (title === null || intentions === null || startDate === null || endDate === null || tasks.length === 0) {
+                setErrorMessage("Please fill out all of the required fields");
                 return;
             }
 
@@ -40,8 +47,6 @@ function ChallengeTitle () {
                 is_active: true,
                 tasks
             };
-
-            console.log(body);
 
             // Sending the POST request to the database.
             const response = await fetch("http://localhost:5000/create-challenge", {
@@ -82,9 +87,17 @@ function ChallengeTitle () {
         }
     }
 
+    // Delete task - Known issue: If the taskList contains 2 of the same string it will delete both
+    const handleDeleteTask = (taskToDelete) => {
+        // Filters through the array and makes a new array that doesn't contain the taskToDelete
+        const newArray = tasks.filter(task => task !== taskToDelete)
+        // Setting the useState to the new array
+        setTasks(newArray);
+        console.log("Tasked Deleted : " + taskToDelete);
+    }
+
     return (
-        <div>
-            
+        <div>         
             <form onSubmit={onSubmitForm} className={styles.box} >
             <h1>Create you Challenge</h1>
                 <div className={styles.box1}>
@@ -142,11 +155,10 @@ function ChallengeTitle () {
                                     <li key={index} className={styles.taskList}>
                                         {task}
                                     </li>     
-                                    <button className={styles.taskButton}>X</button>  
+                                    <div className={styles.taskDeleteButton} onClick={() => handleDeleteTask(task)}>X</div>   
                                 </div>
                             ))}
                         </ul>
-
 
                         </div>
                     </div>                    
@@ -163,7 +175,7 @@ function ChallengeTitle () {
                 </div>            
                 
             </form>
-            
+            { errorMessage && <div className={styles.error}>{errorMessage}</div> }
         </div>
     );
 }

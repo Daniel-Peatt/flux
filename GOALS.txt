@@ -2,17 +2,19 @@
 ### Goals / Work Log 
 
 Short Term Goals:
-    - 
+    - Comment over check challenge status hook
 
 Long Term Goals:
-    - 
+    - Start getting the dashboard widgets connected to a database table.
 
 Features : 
-    - Change home screen if user is login in
-    - add logout Feature
-    - Fix create account and login errors
-    - Add method to delete challenge
-    - Take notes on how event handlers work. 
+    - Add contact page
+    - Add About us page
+    - Add Profile page
+    
+Known issues: 
+    - When the user is timed out, the sever only checks is the login token is present, and not if it is valid.
+    This is causing the some pages to act like the user is logged in, but in reality they are not.
 
 03-06-25 : I added the post api on the backend for sending form data to the database. COMMIT
 03-10-25 : I am having issues getting the create challenge form submitted to the database. something to do with 
@@ -37,3 +39,6 @@ Features :
     when the user is logged in. I need to add the code to get the delete challenge button working. 
 03-25-25 : Today I added the button to delete the challenge. I need to route the dashboard button in the drop down 
     to go to the createChallenge page when there is no challenge linked to that user.
+03-26-25 : Today I added the ability to delete task from the list when creating the challenge. I also added the 
+    checks to make sure the user fills out the create challenge form before proceeding, the webpage will show 
+    an error at the bottom if this happens.
