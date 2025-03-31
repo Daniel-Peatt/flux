@@ -26,13 +26,7 @@ function ChallengeTitle () {
         const token = localStorage.getItem('accessToken');
 
         try {
-            console.log("Submit button for createChallenge has been clicked");
-
-            // Prevents the user from submitting the form by pressing enter.
-            if (e.key === "Enter") {
-                return;
-            }
-
+            // Ensures the entire form is filled out before submiting. 
             if (title === null || intentions === null || startDate === null || endDate === null || tasks.length === 0) {
                 setErrorMessage("Please fill out all of the required fields");
                 return;
@@ -83,6 +77,7 @@ function ChallengeTitle () {
     // If the enter key is pressed while in the task field, this will route it to the handleClick function. 
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
+            console.log("handle click by enter");
             handleClick();
         }
     }
@@ -98,7 +93,15 @@ function ChallengeTitle () {
 
     return (
         <div>         
-            <form onSubmit={onSubmitForm} className={styles.box} >
+            <form 
+                onSubmit={onSubmitForm} 
+                className={styles.box} 
+                onKeyDown={(e) => { // Keeps the form from submitting if the user presses the enter key
+                    if(e.key === "Enter") {
+                        e.preventDefault();
+                    }
+                }}
+                >
             <h1>Create you Challenge</h1>
                 <div className={styles.box1}>
                     <div className={styles.box1_1}>
@@ -151,8 +154,8 @@ function ChallengeTitle () {
                         <div>
                         <ul>
                             {tasks.map((task, index) => (
-                                <div className={styles.taskRow}>
-                                    <li key={index} className={styles.taskList}>
+                                <div key={index} className={styles.taskRow}>
+                                    <li  className={styles.taskList}>
                                         {task}
                                     </li>     
                                     <div className={styles.taskDeleteButton} onClick={() => handleDeleteTask(task)}>X</div>   
