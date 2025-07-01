@@ -11,6 +11,12 @@
     justify-content: center;
     border-bottom: solid;
     padding-bottom: 2rem;
+    background-color: #2b281c;
+}
+
+.daily_info {
+    width: 100%;
+    padding: 10px;
 }
 
 .item {

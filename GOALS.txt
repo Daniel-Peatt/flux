@@ -3,9 +3,12 @@
 
 Short Term Goals:
     - Comment over check challenge status hook
+    - Plan out how the task will be checked every day. 
+    - Work on the current CSS for dashboard widgits
 
 Long Term Goals:
     - Start getting the dashboard widgets connected to a database table.
+    - Add the password reset feature. 
 
 Features : 
     - Add contact page
@@ -42,3 +45,15 @@ Known issues:
 03-26-25 : Today I added the ability to delete task from the list when creating the challenge. I also added the 
     checks to make sure the user fills out the create challenge form before proceeding, the webpage will show 
     an error at the bottom if this happens.
+03-31-25 : Today I fixed where the when the user presses enter on the create challenge page, it doesn't automatically 
+    submit the form. 
+06-24-25 : Today I added the current date to the dashboard
+06-25-25 : Today I added the toggle for the class on the tasks in the dashboard, so that a line runs through the text.
+    I also added a column to the SQL to store the boolean state of task being completed on the checklist. 
+    I need to have the checklist update the database when checking a task, so when the webpage is reloaded it will
+    save the users progress. 
+06-29-25 : I changed checkedtasks in the database to be a nested array. I am now working on updating the database when I check off a task
+    so it will stay updated in the dashboard even when I log off. 
+    I added the API route to update the database checkedtasks at a specific index.
+    now I just need to do the logic on the client side to undestand that the first index is the day and the second index 
+    is the task. 

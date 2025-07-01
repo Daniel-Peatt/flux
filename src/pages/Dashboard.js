@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 
 export default function Dashboard () {
 
+    const date = new Date();
+
     // Used for routing pages
     const navigate = useNavigate();
 
@@ -34,6 +36,11 @@ export default function Dashboard () {
         <div>
             <div className={styles.container}>   
                 <Header />
+                {/* Display the current date */}
+                <div className={styles.daily_info}>
+                   <div>Current Date: {date.toLocaleDateString()}</div> 
+                </div>
+                
                 {/* Render the challenge info */}
                 {/* <div>{results ? JSON.stringify(results) : "No data available"}</div> */}
                 <div className={`${styles.item1} ${styles.item}`}><Tasks /></div>

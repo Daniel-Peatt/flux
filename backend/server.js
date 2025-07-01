@@ -107,7 +107,8 @@ app.post("/create-challenge", authenticateToken, async(req, res) => {
     const {end_date} = req.body;
     const {is_active} = req.body;
     const {tasks} = req.body;
-    const newChallenge = await pool.query(`INSERT INTO challenges (user_id, title, intentions, start_date, end_date, is_active, tasks) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`, [user_id, title, intentions, start_date, end_date, is_active, tasks]);
+    const {checkedTasks} = req.body;
+    const newChallenge = await pool.query(`INSERT INTO challenges (user_id, title, intentions, start_date, end_date, is_active, tasks, checkedTasks) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`, [user_id, title, intentions, start_date, end_date, is_active, tasks, checkedTasks]);
     res.status(201).json({ message: "Challenge created successfully"});
   } catch (err) {
     console.error(err.message);
@@ -154,6 +155,42 @@ app.get("/users/:email", async(req, res) => {
     console.error(err.message);
   }
 })
+
+// Update tasks array
+app.put("/updateTasksArray", authenticateToken, async(req, res) => {
+  try {
+    const user_id = req.user.userId; // gets the user_id from the token
+    const {indexOne, indexTwo} = req.body;
+
+    console.log("Route hit");
+    console.log("Body:", req.body);
+    console.log("User:", req.user);
+
+    // Convert from 0-based (JS) to 1-based (Postgres)
+    const pgIndexOne = indexOne + 1;
+    const pgIndexTwo = indexTwo + 1;
+    
+    // Toggles a BOOLEAN 2D array for the tasks completed on the current day
+    const query = `
+      UPDATE challenges
+      SET checkedtasks[${pgIndexOne}][${pgIndexTwo}] =
+      CASE
+        WHEN checkedtasks[${pgIndexOne}][${pgIndexTwo}] = true THEN false
+        ELSE true
+      END
+      WHERE user_id = $1
+      RETURNING *;
+      `;
+
+    const results = await pool.query(query, [user_id]);
+
+    res.status(200).json(results.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+  }
+})
+
+
 
 // Change user password
 app.put("/users/:id", async(req, res) => {

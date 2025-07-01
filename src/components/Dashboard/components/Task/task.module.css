@@ -58,7 +58,15 @@
 
 .tasks {
     display: flex;
-    /* align-items: center; */
+    font-size: 1rem;
+    justify-content: flex-start;
+    width: 100%;
+    padding-left: 1rem;
+}
+
+.taskSelected {
+    display: flex;
+    text-decoration: line-through;
     font-size: 1rem;
     justify-content: flex-start;
     width: 100%;
@@ -86,4 +94,6 @@
     background-color: #49483c; /* Change background when checked */
     border-width: .2rem;
 }
+
+
 

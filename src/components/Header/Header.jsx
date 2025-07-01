@@ -2,6 +2,7 @@ import styles from "./Header.module.css";
 import { useNavigate } from "react-router-dom";
 import { checkLoginStatus, useChallengeExist } from "../../utils";
 import { useState } from "react";
+import Contact from '../PopUp/Contact.jsx'; // Importing popup component for Contact
 
 function Header () {
     const [isLoggedIn, setIsLoggedIn] = useState(checkLoginStatus());
@@ -45,8 +46,8 @@ function Header () {
                     <div>About us</div>
                     { isLoggedIn && <div onClick={logOut}>Log out</div> }
                 </div>
-             </nav>
-        </header>
+             </nav> 
+        </header> 
     )
 }
 

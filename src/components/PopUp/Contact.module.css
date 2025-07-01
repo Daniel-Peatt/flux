@@ -1,0 +1,4 @@
+.popupOverlay {
+    z-index: 1000;
+    border: solid;
+}

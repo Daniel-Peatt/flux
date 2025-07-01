@@ -19,6 +19,24 @@ function ChallengeTitle () {
     // Used for routing pages
     const navigate = useNavigate();
 
+    // Convert difference between dates to miliseconds
+    const diffInMil = new Date(endDate) - new Date(startDate);
+    // Converst milliseconds to days 
+    const totalDays = Math.ceil(diffInMil / (1000 * 60 * 60 *24));
+
+    
+    
+    if(startDate && endDate) {
+        // create an array length of totalDays and fill it with null values
+       var checkedDaysNestedArray = Array(totalDays).fill(null);
+       // fills each index of the array with an array the size of the number of task
+       checkedDaysNestedArray = checkedDaysNestedArray.map(() => Array(tasks.length).fill(false)); 
+    }
+    
+
+    
+    
+
     const onSubmitForm = async (e) => {
         e.preventDefault(); // keeps it from refreshing 
 
@@ -39,7 +57,8 @@ function ChallengeTitle () {
                 start_date: startDate,
                 end_date: endDate,
                 is_active: true,
-                tasks
+                tasks,
+                checkedTasks: checkedDaysNestedArray 
             };
 
             // Sending the POST request to the database.

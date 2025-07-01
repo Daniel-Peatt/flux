@@ -9,6 +9,7 @@
     background-color: rgb(227, 205, 163, .15);
     /* Allows overflow data to seen by scrolling */
     overflow-y: auto;
+    flex-direction: column;
 }
 
 /* Width of the entire scroll-bar */
@@ -40,7 +41,14 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     width: 80%;
-    height: 90%;
+    height: 100%;
+    grid-gap: 10px;
+}
+
+h3 {
+    padding: 0;
+    margin: 0;
+    text-align: center;
 }
 
 .cell {
@@ -48,6 +56,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100%;
-    padding: .20rem;
+    height: 80%;
+    /* padding: .20rem; */
+    background-color: rgb(102, 93, 55);
 }
