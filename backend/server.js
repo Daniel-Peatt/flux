@@ -135,6 +135,29 @@ app.get("/challenge", authenticateToken, async(req, res) => {
   }
 })
 
+app.get("/checkDailyTask", authenticateToken, async(req, res) => {
+  try {
+    const user_id = req.user.userId; // gets the user_id from the token
+
+    const query = `
+      SELECT checkedtasks FROM challenges
+      WHERE user_id = $1
+    `;
+
+    const results = await pool.query(query, [user_id]);
+
+    if (results.length === 0) {
+    return res.json(null); // Return null if no challenges are found
+    }
+
+    res.json(results); // Otherwise, return the user challenges
+
+
+  } catch (err) {
+    console.error(err.message);
+  }
+})
+
 // Get all users 
 app.get("/users", async(req,res) => {
   try {

@@ -1,20 +1,39 @@
 .box {
     width: 80%;
     height: 30rem;
-    padding-top: 2rem;
+    padding-top: 1rem;
     border-radius: 50px;
     display: flex;
-    justify-content: center;
+    justify-content: baseline;
     align-items: center;
     background-color: rgb(227, 205, 163, .15);
     /* Allows overflow data to seen by scrolling */
     overflow-y: auto;
     flex-direction: column;
+    border: solid;
+    border-width: 10px;
+    padding-bottom: 2rem;
+    
+}
+
+.title {
+    text-align: center;
+    width: 100%;
+}
+
+.title_completed {
+    opacity: 1;
+    transition: opacity 0.4s ease-in;
+}
+
+.title_hidden {
+    opacity: 0;
+    transition: opacity 0.4s ease-out;
 }
 
 /* Width of the entire scroll-bar */
 .box::-webkit-scrollbar {
-    width: 12px;
+    width: 5px;
 }
 
 /* Makes the scroll bar track invisible */
@@ -38,25 +57,30 @@
 }
 
 .calendar {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    width: 80%;
-    height: 100%;
-    grid-gap: 10px;
-}
-
-h3 {
-    padding: 0;
-    margin: 0;
-    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 90%;
+    gap: 5px;
+    margin-left: 5px;
 }
 
 .cell {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 80%;
-    /* padding: .20rem; */
+    width: 2.5rem;
+    height: 2.5rem;
     background-color: rgb(102, 93, 55);
+    transition: 1s;
+}
+
+.cellCompleted {
+    background-color: rgb(68, 86, 43);
+    color: rgb(144, 144, 144);
+}
+
+.cellFailed {
+    background-color: rgb(86, 59, 43);
+    color: rgb(144, 144, 144);
 }

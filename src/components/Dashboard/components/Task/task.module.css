@@ -1,20 +1,22 @@
 .box {
     border: solid;
     width: 80%;
-    height: 40rem;
+    height: 30rem;
     border-radius: 50px;
     display: flex;
     padding-top: 2rem;
     border-color: rgba(227, 205, 163, .5);
     flex-direction: column; 
-    align-items: center;
+    padding-bottom: 2rem;
     /* Allows overflow data to seen by scrolling */
     overflow-y: auto;
+    overflow-x: hidden;
+    border-width: 10px;
 }
 
 /* Width of the entire scroll-bar */
 .box::-webkit-scrollbar {
-    width: 12px;
+    width: 6px;
 }
 
 /* Makes the scroll bar track invisible */
@@ -38,10 +40,10 @@
 }
 
 .title {
-    display: flex;
-    justify-content: center;
+    text-align: center;
     font-size: 2rem;
     color: #EAE2C6;
+    padding: 1rem;
 }
 
 .taskRow {
@@ -49,28 +51,33 @@
     justify-content: space-between;
     padding: 1rem;
     border-color: rgba(227, 205, 163, .5);
-    border-radius: 10px;
-    margin: 1rem;
     font-size: large;
     font-weight: bold;
     color: #EAE2C6;
+    width: 100%;
+}
+
+.backgroundOne {
+    background-color: rgba(227, 205, 163, 0.133);
+}
+
+.backgroundTwo {
+    background-color: rgba(244, 244, 244, 0.34);
 }
 
 .tasks {
     display: flex;
     font-size: 1rem;
     justify-content: flex-start;
+    align-items: center;
     width: 100%;
     padding-left: 1rem;
+    padding-right: 2rem;
 }
 
 .taskSelected {
-    display: flex;
     text-decoration: line-through;
-    font-size: 1rem;
-    justify-content: flex-start;
-    width: 100%;
-    padding-left: 1rem;
+    color: red;
 }
 
 /* Hide default checkbox */
@@ -79,18 +86,21 @@
 }
 
 .checkBox span {
-  display: inline-block;
   width: 20px; /* Adjust size */
   height: 20px;
   border-radius: 50%; /* Makes it a circle */
-  border: 2px solid #333; /* Border color */
-  position: relative;
+  border: 2px solid;
   cursor: pointer;
   border-color: rgba(255, 255, 255, 0.829);
   border-width: .2rem;
 }
 
-.checkBox input:checked + span {
+.checkBox {
+    display: flex;
+    align-items: center;
+}
+
+.checkBoxSelected span {
     background-color: #49483c; /* Change background when checked */
     border-width: .2rem;
 }

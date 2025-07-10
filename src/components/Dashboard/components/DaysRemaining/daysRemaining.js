@@ -15,7 +15,6 @@ function DaysRemaining () {
     // Fetching data from the challenge table. 
     const token = localStorage.getItem('accessToken'); // Get token from localStorage
     const { data: results, loading, error } = useFetch('http://localhost:5000/challenge', token);
-    console.log("Fetched results on client:", results);
 
     const firstChallenge = results && results.length > 0 ? results[0] : null;
 

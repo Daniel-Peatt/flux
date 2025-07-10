@@ -1,6 +1,7 @@
 import styles from "./About.module.css";
 import { useNavigate } from "react-router-dom";
 
+
 const About = () => {
     // Used to navigate to the createAccount Route when button is pressed
     const navigate = useNavigate();

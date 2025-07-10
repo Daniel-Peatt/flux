@@ -50,6 +50,8 @@ function ChallengeTitle () {
                 return;
             }
 
+            console.log('letterCount: ' + intentions.length);
+
             // Information from form.
             const body = {
                 title,
@@ -126,6 +128,7 @@ function ChallengeTitle () {
                     <div className={styles.box1_1}>
                         <input 
                             type="text"
+                            maxLength={50}
                             className={`${styles.titleField} ${styles.field}`} 
                             placeholder="Name your challenge here..." 
                             onChange={e => setTitle(e.target.value)}
@@ -135,6 +138,7 @@ function ChallengeTitle () {
                             className={`${styles.intentionsField} ${styles.field}`} 
                             placeholder="Intentions for challenge..." 
                             onChange={e => setIntentions(e.target.value)}
+                            maxLength={255}
                         />
                         <div className={styles.row}>
                             <h3 style={{marginLeft: "10px"}}>Start Date</h3>
@@ -155,6 +159,7 @@ function ChallengeTitle () {
                         <div className={styles.row}>
                            <input 
                                 type="text" 
+                                maxLength={50}
                                 className={`${styles.addTaskField}`} 
                                 placeholder="Add a task" 
                                 value={taskfield}

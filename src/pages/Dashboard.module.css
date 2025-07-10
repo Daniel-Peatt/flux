@@ -5,7 +5,7 @@
     margin-left: auto;
     margin-right: auto;
     /* Setting a width for the content */
-    width: 1280px;
+    width: 80vw;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -16,7 +16,7 @@
 
 .daily_info {
     width: 100%;
-    padding: 10px;
+    padding: 2rem;
 }
 
 .item {
@@ -44,8 +44,11 @@
     padding-bottom: 2rem;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
     .container {
-        width: 600px;
+        width: 80vw;
+    }
+    .footer {
+        width: 80vw;
     }
 }
